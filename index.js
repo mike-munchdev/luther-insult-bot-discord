@@ -1,10 +1,24 @@
 const Discord = require('discord.js');
 
 const client = new Discord.Client();
+const { token, commandPrefix } = require('./config/config.json');
 
 client.once('ready', () => {
-  console.log('LutherInsultBot is ready to insult you!');
+  client.channels.cache
+    .get('777281706137878551')
+    .send('Luther Insult Bot is ready to insult you!');
+});
+
+client.on('message', (message) => {
+  if (message.author.bot || !message.content.startsWith(commandPrefix)) return;
+
+  const args = message.content.split(' ');
+  const command = args[0].slice(commandPrefix.length);
+
+  if (command.toLowerCase() === 'luther') {
+    message.reply('How dare you! :angry:');
+  }
 });
 
 // make sure this is the last of the file
-client.login('Nzc5MDcyMjA5MTkyMzUzNzkz.X7bNiQ.scI4XGkQ9LYcWGKnVOaQsC2wXuI');
+client.login(token);
