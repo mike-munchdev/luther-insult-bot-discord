@@ -7,8 +7,8 @@
 3. Configure Heroku App As Worker
 4. Set Automatic Deployment in Heroku
 5. Create Environment Variables in Heroku
-6. Start the Worker Dyno
-7. Push Changes to GitHub
+6. Push Changes to GitHub
+7. Start the Worker Dyno
 8. Conclusion
 
 #### Create Heroku App
@@ -34,25 +34,25 @@
 4. Update the index.js file to use dotenv
 
 ```javascript
-if (process.env.NODE_ENV !== 'production') require('dotenv').config();
-const Discord = require('discord.js');
+if (process.env.NODE_ENV !== "production") require("dotenv").config();
+const Discord = require("discord.js");
 
 const client = new Discord.Client();
 const { TOKEN, COMMAND_PREFIX } = process.env;
 
-const insults = require('./data/insults');
+const insults = require("./data/insults");
 
-client.once('ready', () => {
-  console.log('Luther Insult Bot is ready to insult you!');
+client.once("ready", () => {
+  console.log("Luther Insult Bot is ready to insult you!");
 });
 
-client.on('message', (message) => {
+client.on("message", (message) => {
   if (message.author.bot || !message.content.startsWith(COMMAND_PREFIX)) return;
 
-  const args = message.content.split(' ');
+  const args = message.content.split(" ");
   const command = args[0].slice(COMMAND_PREFIX.length);
 
-  if (command.toLowerCase() === 'luther') {
+  if (command.toLowerCase() === "luther") {
     message.reply(insults[Math.floor(Math.random() * insults.length)]);
   }
 });
